@@ -40,7 +40,7 @@ bow_features = pd.DataFrame(columns=(['Clothing ID'] + unique_tokens))
 row = 0
 
 for review in all_reviews:
-    bow_features.append({'Clothing ID': reviews_df.iloc[row, 1]}, ignore_index=True)
+    bow_features = bow_features.append({'Clothing ID': reviews_df.iloc[row, 1]}, ignore_index=True)
     review_tokens = tokenizer.tokenize(str(review))
     tokens_list = {}
     for token in review_tokens:
@@ -51,7 +51,7 @@ for review in all_reviews:
             else:
                 tokens_list[token] = 1
     for token in tokens_list:
-        bow_features.append({token: tokens_list[token]}, ignore_index=True)
+        bow_features = bow_features.append({token: tokens_list[token]}, ignore_index=True)
     row += 1
 
 bow_features = bow_features.replace(np.nan, 0)
